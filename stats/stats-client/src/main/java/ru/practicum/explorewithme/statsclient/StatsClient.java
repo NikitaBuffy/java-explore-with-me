@@ -1,5 +1,6 @@
 package ru.practicum.explorewithme.statsclient;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,9 @@ import java.util.Map;
 public class StatsClient {
     private final RestTemplate rest;
 
-    private static final String STAT_SERVER_URL = "${stats-server.url}";
+    @Value("${stats-server.url}")
+    private String serverUrl;
+
     private static final String HIT_API_PREFIX = "/hit";
     private static final String STATS_API_PREFIX = "/stats";
 
@@ -21,7 +24,7 @@ public class StatsClient {
 
     public void addHit(HitDto hitDto) {
         HttpEntity<HitDto> requestEntity = new HttpEntity<>(hitDto);
-        rest.exchange(STAT_SERVER_URL + HIT_API_PREFIX, HttpMethod.POST, requestEntity, Object.class);
+        rest.exchange(serverUrl + HIT_API_PREFIX, HttpMethod.POST, requestEntity, Object.class);
     }
 
     public ResponseEntity<Object> getStats(String start, String end, String[] uris, boolean unique) {
@@ -34,13 +37,13 @@ public class StatsClient {
                     "end", end,
                     "uris", uris,
                     "unique", unique);
-            url = STAT_SERVER_URL + STATS_API_PREFIX + "/?start={start}&end={end}&uris={uris}&unique={unique}";
+            url = serverUrl + STATS_API_PREFIX + "/?start={start}&end={end}&uris={uris}&unique={unique}";
         } else {
             parameters = Map.of(
                     "start", start,
                     "end", end,
                     "unique", unique);
-            url = STAT_SERVER_URL + STATS_API_PREFIX + "/?start={start}&end={end}&unique={unique}";
+            url = serverUrl + STATS_API_PREFIX + "/?start={start}&end={end}&unique={unique}";
         }
 
         ResponseEntity<Object> response = rest.getForEntity(url, Object.class, parameters);

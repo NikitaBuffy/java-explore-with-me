@@ -19,10 +19,10 @@ public class Hit {
     @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String app;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String uri;
 
     @Column(nullable = false, length = 40)

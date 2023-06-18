@@ -4,20 +4,11 @@ import lombok.experimental.UtilityClass;
 import ru.practicum.explorewithme.statsdto.HitDto;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import static ru.practicum.explorewithme.statsserver.model.Constants.*;
 
 @UtilityClass
 public class HitMapper {
-
-//    public static HitDto hitToDto(Hit hit) {
-//        return new HitDto(
-//                hit.getId(),
-//                hit.getApp(),
-//                hit.getUri(),
-//                hit.getIp(),
-//                hit.getTimestamp().toString()
-//        );
-//    }
 
     public static Hit dtoToHit(HitDto hitDto) {
         return new Hit(
@@ -25,7 +16,7 @@ public class HitMapper {
                 hitDto.getApp(),
                 hitDto.getUri(),
                 hitDto.getIp(),
-                LocalDateTime.parse(hitDto.getTimestamp(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                LocalDateTime.parse(hitDto.getTimestamp(), DATE_FORMAT)
         );
     }
 }

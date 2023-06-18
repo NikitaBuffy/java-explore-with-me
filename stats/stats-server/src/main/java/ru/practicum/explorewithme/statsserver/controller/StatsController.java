@@ -8,8 +8,9 @@ import ru.practicum.explorewithme.statsdto.StatsDto;
 import ru.practicum.explorewithme.statsserver.service.StatsService;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import static ru.practicum.explorewithme.statsserver.model.Constants.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class StatsController {
                                    @RequestParam(required = false) String[] uris,
                                    @RequestParam(defaultValue = "false") boolean unique) {
         log.info("Stats-Server. GET stats: start = {}, end = {}, uris = {}, unique = {}", start, end, uris, unique);
-        return statsService.getStats(LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-                LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), uris, unique);
+        return statsService.getStats(LocalDateTime.parse(start, DATE_FORMAT),
+                LocalDateTime.parse(end, DATE_FORMAT), uris, unique);
     }
 }
