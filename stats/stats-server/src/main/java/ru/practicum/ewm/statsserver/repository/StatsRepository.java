@@ -25,7 +25,7 @@ public interface StatsRepository extends JpaRepository<Hit, Long> {
             "AND h.uri IN :uris " +
             "GROUP BY h.app, h.uri, h.ip " +
             "ORDER BY COUNT(DISTINCT h.ip) DESC")
-    List<Stats> findUrisWithUniqueIp(LocalDateTime start, LocalDateTime end, String[] uris);
+    List<Stats> findUrisWithUniqueIp(LocalDateTime start, LocalDateTime end, List<String> uris);
 
     @Query("SELECT new ru.practicum.ewm.statsserver.model.stats.Stats(h.app, h.uri, COUNT(h.uri)) " +
             "FROM Hit h " +
@@ -40,5 +40,5 @@ public interface StatsRepository extends JpaRepository<Hit, Long> {
             "AND h.uri IN :uris " +
             "GROUP BY h.app, h.uri " +
             "ORDER BY COUNT(h.uri) DESC")
-    List<Stats> findUris(LocalDateTime start, LocalDateTime end, String[] uris);
+    List<Stats> findUris(LocalDateTime start, LocalDateTime end, List<String> uris);
 }

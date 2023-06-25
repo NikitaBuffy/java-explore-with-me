@@ -33,7 +33,7 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
-    public List<StatsDto> getStats(String start, String end, String[] uris, boolean unique) {
+    public List<StatsDto> getStats(String start, String end, List<String> uris, boolean unique) {
         List<Stats> statsList;
 
         LocalDateTime startDate = LocalDateTime.parse(start, DATE_FORMAT);

@@ -40,7 +40,7 @@ public class StatsController {
     @GetMapping("/stats")
     public List<StatsDto> getStats(@RequestParam String start,
                                    @RequestParam String end,
-                                   @RequestParam(required = false) String[] uris,
+                                   @RequestParam(required = false) List<String> uris,
                                    @RequestParam(defaultValue = "false") boolean unique) {
         log.info("Stats-Server. GET stats: start = {}, end = {}, uris = {}, unique = {}", start, end, uris, unique);
         return statsService.getStats(start, end, uris, unique);
