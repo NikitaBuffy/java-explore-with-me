@@ -24,7 +24,9 @@ public class EventMapper {
                 UserMapper.toUserShortDto(event.getInitiator()),
                 event.isPaid(),
                 event.getTitle(),
-                event.getViews()
+                event.getViews(),
+                event.getComments() != null ? event.getComments().size() : 0,
+                event.getRating()
         );
     }
 
@@ -47,7 +49,9 @@ public class EventMapper {
                 null,
                 null,
                 null,
-                null
+                null,
+                null,
+                0.0
         );
     }
 
@@ -68,7 +72,8 @@ public class EventMapper {
                 event.isRequestModeration(),
                 event.getState().toString(),
                 event.getTitle(),
-                event.getViews()
+                event.getViews(),
+                event.getRating()
         );
     }
 }
