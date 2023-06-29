@@ -30,6 +30,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static ru.practicum.ewm.util.Constants.DATE_FORMAT;
@@ -159,7 +160,7 @@ public class CommentServiceImpl extends PageRequestUtil implements CommentServic
     @Transactional
     public void deleteCommentByAdmin(Long commentId) {
         Comment comment = commentRepository.getExistingComment(commentId);
-        Event event = comment.getEvent();
+        Event event = eventRepository.getExistingEvent(comment.getEvent().getId());
         commentRepository.delete(comment);
         photoRepository.deleteByCommentId(commentId);
         log.info("Deleted comment with ID = {} by admin and linked photos", commentId);
@@ -175,7 +176,7 @@ public class CommentServiceImpl extends PageRequestUtil implements CommentServic
 
     private void calculateAndUpdateRating(Event event) {
         Double rating = commentRepository.getAverageRatingByEventId(event.getId());
-        event.setRating(rating);
-        eventRepository.updateEventRating(rating, event.getId());
+        event.setRating(Objects.requireNonNullElse(rating, 0.0));
+        eventRepository.updateEventRating(event.getRating(), event.getId());
     }
 }
