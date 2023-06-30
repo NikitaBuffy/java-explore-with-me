@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import ru.practicum.ewm.dto.category.CategoryDto;
 import ru.practicum.ewm.dto.user.UserShortDto;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -55,4 +57,14 @@ public class EventShortDto {
      * Количество просмотрев события
      */
     private Long views;
+
+    /*
+     * Количество комментариев к событию
+     */
+    private int comments;
+
+    /*
+     * Рейтинг события
+     */
+    private BigDecimal rating;
 }

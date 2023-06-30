@@ -7,6 +7,8 @@ import ru.practicum.ewm.dto.category.CategoryDto;
 import ru.practicum.ewm.dto.location.LocationDto;
 import ru.practicum.ewm.dto.user.UserShortDto;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -91,4 +93,9 @@ public class EventFullDto {
      * Количество просмотрев события
      */
     private Long views;
+
+    /*
+     * Рейтинг события
+     */
+    private BigDecimal rating;
 }

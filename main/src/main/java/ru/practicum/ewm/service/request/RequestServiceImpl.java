@@ -161,9 +161,9 @@ public class RequestServiceImpl extends PageRequestUtil implements RequestServic
             eventRepository.save(event);
         }
 
-        Request addedRequest = requestRepository.save(newRequest);
+        ParticipationRequestDto addedRequest = RequestMapper.toRequestDto(requestRepository.save(newRequest));
         log.info("Created participation request = {}", addedRequest);
-        return RequestMapper.toRequestDto(addedRequest);
+        return addedRequest;
     }
 
     @Override

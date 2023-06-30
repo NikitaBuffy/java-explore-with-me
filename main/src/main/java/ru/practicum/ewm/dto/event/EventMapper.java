@@ -7,6 +7,7 @@ import ru.practicum.ewm.dto.user.UserMapper;
 import ru.practicum.ewm.model.event.Event;
 import ru.practicum.ewm.model.request.RequestStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static ru.practicum.ewm.util.Constants.*;
@@ -24,7 +25,9 @@ public class EventMapper {
                 UserMapper.toUserShortDto(event.getInitiator()),
                 event.isPaid(),
                 event.getTitle(),
-                event.getViews()
+                event.getViews(),
+                event.getComments() != null ? event.getComments().size() : 0,
+                event.getRating()
         );
     }
 
@@ -47,7 +50,9 @@ public class EventMapper {
                 null,
                 null,
                 null,
-                null
+                null,
+                null,
+                BigDecimal.valueOf(0.0)
         );
     }
 
@@ -68,7 +73,8 @@ public class EventMapper {
                 event.isRequestModeration(),
                 event.getState().toString(),
                 event.getTitle(),
-                event.getViews()
+                event.getViews(),
+                event.getRating()
         );
     }
 }

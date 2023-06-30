@@ -9,7 +9,8 @@ import org.springframework.data.domain.Sort;
 public enum EventSort {
 
     EVENT_DATE(Sort.by(Sort.Direction.DESC, "eventDate")),
-    VIEWS(Sort.by(Sort.Direction.DESC, "views"));
+    VIEWS(Sort.by(Sort.Direction.DESC, "views")),
+    RATING(Sort.by(Sort.Direction.DESC, "rating"));
 
     private final Sort sortValue;
 }
