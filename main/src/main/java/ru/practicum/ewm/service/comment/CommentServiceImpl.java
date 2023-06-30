@@ -27,6 +27,7 @@ import ru.practicum.ewm.util.PageRequestUtil;
 
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -175,8 +176,8 @@ public class CommentServiceImpl extends PageRequestUtil implements CommentServic
     }
 
     private void calculateAndUpdateRating(Event event) {
-        Double rating = commentRepository.getAverageRatingByEventId(event.getId());
-        event.setRating(Objects.requireNonNullElse(rating, 0.0));
+        BigDecimal rating = commentRepository.getAverageRatingByEventId(event.getId());
+        event.setRating(Objects.requireNonNullElse(rating, BigDecimal.valueOf(0.0)));
         eventRepository.updateEventRating(event.getRating(), event.getId());
     }
 }

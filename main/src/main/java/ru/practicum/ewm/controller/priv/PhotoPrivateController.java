@@ -5,7 +5,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.practicum.ewm.dto.photo.PhotoDto;
@@ -39,19 +38,22 @@ public class PhotoPrivateController {
      * Возвращает HTML страницу с загруженной фотографией в теге <img>
      */
     @GetMapping("/files/{id}")
-    public ResponseEntity<String> getFile(@PathVariable String id) {
+    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         Photo photo = photoService.getPhotoById(id);
         byte[] fileData = photo.getData();
 
-        String base64Data = Base64Utils.encodeToString(fileData);
-
-        String imageUrl = "data:" + photo.getType() + ";base64," + base64Data;
-        String imgTag = "<img src=\"" + imageUrl + "\">";
-        String htmlContent = "<!DOCTYPE html><html><head><title>" + photo.getName() + "</title></head><body>" + imgTag + "</body></html>";
+        MediaType mediaType;
+        if (photo.getType().equals("image/png")) {
+            mediaType = MediaType.IMAGE_PNG;
+        } else if (photo.getType().equals("image/jpeg")) {
+            mediaType = MediaType.IMAGE_JPEG;
+        } else {
+            throw new UnsupportedOperationException("Unsupported file format.");
+        }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.TEXT_HTML);
+        headers.setContentType(mediaType);
 
-        return new ResponseEntity<>(htmlContent, headers, HttpStatus.OK);
+        return new ResponseEntity<>(fileData, headers, HttpStatus.OK);
     }
 }

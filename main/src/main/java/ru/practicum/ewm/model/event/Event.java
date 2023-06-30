@@ -12,6 +12,7 @@ import ru.practicum.ewm.model.request.Request;
 import ru.practicum.ewm.model.user.User;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -88,5 +89,5 @@ public class Event {
     private Long views;
 
     @Column(precision = 2, scale = 1)
-    private double rating;
+    private BigDecimal rating;
 }

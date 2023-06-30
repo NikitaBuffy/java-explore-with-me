@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import ru.practicum.ewm.dto.category.CategoryDto;
 import ru.practicum.ewm.dto.user.UserShortDto;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -64,5 +66,5 @@ public class EventShortDto {
     /*
      * Рейтинг события
      */
-    private double rating;
+    private BigDecimal rating;
 }

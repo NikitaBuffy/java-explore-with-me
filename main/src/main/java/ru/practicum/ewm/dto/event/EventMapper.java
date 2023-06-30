@@ -7,6 +7,7 @@ import ru.practicum.ewm.dto.user.UserMapper;
 import ru.practicum.ewm.model.event.Event;
 import ru.practicum.ewm.model.request.RequestStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static ru.practicum.ewm.util.Constants.*;
@@ -51,7 +52,7 @@ public class EventMapper {
                 null,
                 null,
                 null,
-                0.0
+                BigDecimal.valueOf(0.0)
         );
     }
 

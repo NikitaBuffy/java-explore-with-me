@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import ru.practicum.ewm.exception.CommentNotFoundException;
 import ru.practicum.ewm.model.comment.Comment;
 
+import java.math.BigDecimal;
+
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
@@ -19,7 +21,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     Page<Comment> findAll(Specification<Comment> specification, Pageable pageable);
 
     @Query("SELECT AVG(c.rating) FROM Comment c WHERE c.event.id = :eventId")
-    Double getAverageRatingByEventId(Long eventId);
+    BigDecimal getAverageRatingByEventId(Long eventId);
 
     default Comment getExistingComment(Long commentId) {
         return findById(commentId).orElseThrow(() -> {
