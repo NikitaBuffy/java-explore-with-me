@@ -49,7 +49,7 @@ API основного сервиса разделена на три части:
 #### Get all events (с возможностью фильтрации и пагинации)
 
 ```http
-  GET /events
+GET /events
 ```
 
 | Параметр | Тип     | Описание                |
@@ -67,7 +67,7 @@ API основного сервиса разделена на три части:
 #### Edit category by admin
 
 ```http
-  PATCH /admin/categories/{catId}
+PATCH /admin/categories/{catId}
 ```
 
 | Параметр | Тип     | Описание                       |
